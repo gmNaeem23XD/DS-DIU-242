@@ -1,0 +1,64 @@
+//QL2. Implement QA & QB (Linked List Operations - Mr. Tamim’s Solution)
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+struct Node* createNode(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->left = newNode->right = NULL;
+    return newNode;
+}
+
+struct Node* insert(struct Node* root, int value) {
+    if (root == NULL) return createNode(value);
+    if (value < root->data)
+        root->left = insert(root->left, value);
+    else if (value > root->data)
+        root->right = insert(root->right, value);
+    return root;
+}
+
+void inorder(struct Node* root) {
+    if (root == NULL) return;
+    inorder(root->left);
+    printf("%d ", root->data);
+    inorder(root->right);
+}
+
+int search(struct Node* root, int key) {
+    if (root == NULL) return 0;
+    if (root->data == key) return 1;
+    if (key < root->data)
+        return search(root->left, key);
+    else
+        return search(root->right, key);
+}
+
+int main() {
+    int values[] = {26, 25, 30, 86, 22, 70, 52, 100, 120, 135};
+    struct Node* root = NULL;
+
+    for (int i = 0; i < 10; i++) {
+        root = insert(root, values[i]);
+    }
+
+    printf("Inorder Traversal of BST: ");
+    inorder(root);
+    printf("\n");
+
+    int studentID_last_two = 23;
+
+    if (search(root, studentID_last_two))
+        printf("Number %d found in BST.\n", studentID_last_two);
+    else
+        printf("Number %d NOT found in BST.\n", studentID_last_two);
+
+    return 0;
+}
