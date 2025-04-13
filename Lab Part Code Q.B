@@ -1,4 +1,4 @@
-//QL2. Implement QA & QB (Linked List Operations - Mr. Tamim’s Solution)
+
 #include <stdio.h>
 #include <stdlib.h>
 
